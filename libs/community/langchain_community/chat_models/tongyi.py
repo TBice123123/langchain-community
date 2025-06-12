@@ -108,7 +108,7 @@ def convert_dict_to_message(
                                 "name": value["function"].get("name"),
                                 "args": value["function"].get("arguments"),
                                 "id": value.get("id"),
-                                # Tongyi does not respond with index,
+                                #  Tongyi does not respond with index,
                                 # use index in the list instead
                                 "index": value.get("index", index),
                             }
