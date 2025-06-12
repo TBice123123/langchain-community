@@ -110,7 +110,7 @@ def convert_dict_to_message(
                                 "id": value.get("id"),
                                 # Tongyi does not respond with index,
                                 # use index in the list instead
-                                "index": index,
+                                "index": value.get("index", index),
                             }
                         )
                     except KeyError:
@@ -758,7 +758,7 @@ class ChatTongyi(BaseChatModel):
             messages=messages, stop=stop, stream=True, **kwargs
         )
         async for stream_resp, is_last_chunk in agenerate_with_last_element_mark(
-            self.astream_completion_with_retry(**params)
+            self.astream_completion_with_retry(**params)  # type: ignore[reportCallIssue]
         ):
             chunk = ChatGenerationChunk(
                 **self._chat_generation_from_qwen_resp(
